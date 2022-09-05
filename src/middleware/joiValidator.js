@@ -1,4 +1,4 @@
-import { registerUserSchema } from '../schemas/userJoiSchema.js'
+import { registerUserSchema, loginUserSchema, updateUserSchema } from '../schemas/userJoiSchema.js'
 
 const requestValidator = (req, next, schema) => {
     const options = {
@@ -19,5 +19,15 @@ const requestValidator = (req, next, schema) => {
 
 export const createUserSchema = (req, res, next) => {
     const schema = registerUserSchema
+    requestValidator(req, next, schema);
+}
+
+export const loginSchema = (req, res, next) => {
+    const schema = loginUserSchema
+    requestValidator(req, next, schema);
+}
+
+export const updateSchema = (req, res, next) => {
+    const schema = updateUserSchema
     requestValidator(req, next, schema);
 }

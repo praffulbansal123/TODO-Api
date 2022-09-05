@@ -2,6 +2,8 @@ import express from "express";
 import createError from "http-errors";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 import Database from "../src/db/db.js";
 import userRouter from "./routes/userRoute.js";
 
@@ -17,6 +19,20 @@ app.set("port", port);
 
 // Implementing morgan middleware
 app.use(morgan("dev"));
+
+// Implementing express session middleware
+app.use(session({
+  secret : process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie : {
+    maxAge: 2 * 24 * 60 * 60 * 1000,
+  },
+  store:  MongoStore.create({
+    mongoUrl : process.env.MONGOOSE_URL,
+    ttl: parseInt(process.env.TTL)
+  })
+}));
 
 // Parsing middleware
 app.use(express.json());
