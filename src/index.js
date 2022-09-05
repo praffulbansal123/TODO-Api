@@ -6,6 +6,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import Database from "../src/db/db.js";
 import userRouter from "./routes/userRoute.js";
+import todoRouter from "./routes/todoRoute.js";
 
 // dotenv configuration
 dotenv.config();
@@ -43,6 +44,9 @@ Database.init();
 
 // diverting user request to user router
 app.use("/user", userRouter);
+
+// diverting TODO request to todo router
+app.use("/todo", todoRouter);
 
 // checking invalid route
 app.use(async (req, res, next) => {
