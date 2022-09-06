@@ -3,6 +3,10 @@ import createError from "http-errors";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+/*
+* @author Prafful Bansal
+* @description Service for creating new users
+*/
 export const createUser = async (input) => {
   try {
 
@@ -30,6 +34,10 @@ export const createUser = async (input) => {
   }
 };
 
+/*
+* @author Prafful Bansal
+* @description Service for login
+*/
 export const userLogin = async (input) => {
   try {
     if (input.email === undefined) {
@@ -70,33 +78,25 @@ export const userLogin = async (input) => {
   }
 };
 
+/*
+* @author Prafful Bansal
+* @description Service for updating user details
+*/
 export const userUpdate = async (input, userId) => {
   try {
 
     const user = await User.findById(userId)
 
-    if(user.phone === input.phone)
+    if(user.phone && user.phone === input.phone)
       throw createError.NotAcceptable(`user phone no is already upto date`)
     
-    if(user.fname === input.fname)
+    if(user.fname && user.fname === input.fname)
       throw createError.NotAcceptable(`user fname no is already upto date`)
     
-    if(user.lname === input.lname)
+    if(user.lname && user.lname === input.lname)
       throw createError.NotAcceptable(`user lname no is already upto date`)
 
-    if(!input.fname){
-      input.fname = user.fname
-    }
-
-    if(!input.lname){
-      input.lname = user.lname
-    }
-
-    if(!input.phone){
-      input.phone = user.phone
-    }
-
-    const updateUser = await User.findOneAndUpdate({_id: userId}, {$set: {fname: input.fname, lname: input.lname, phone: input.phone}}, {new: true})
+    const updateUser = await User.findOneAndUpdate({_id: userId}, {$set: (input)}, {new: true})
 
     // masking password
     updateUser.password = undefined

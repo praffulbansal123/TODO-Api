@@ -3,6 +3,10 @@ import bcrypt from "bcrypt";
 
 const {Schema, model} = mongoose
 
+/*
+* @author Prafful Bansal
+* @description User schema and model objects
+*/
 export const userSchema = new Schema({
     title: {type: String},
     fname: {type: String},

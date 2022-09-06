@@ -2,6 +2,10 @@ import createError from "http-errors";
 import logger from "../logger/logger.js";
 import jwt from "jsonwebtoken";
 
+/*
+* @author Prafful Bansal
+* @description Middleware of Authentication
+*/
 export const authentication = async function (req, res, next) {
   try {
     let token = req.headers["authorization"];
@@ -22,6 +26,10 @@ export const authentication = async function (req, res, next) {
   }
 };
 
+/*
+* @author Prafful Bansal
+* @description Middleware of AuthorizationByUserID
+*/
 export const authorizationByUserID = async function (req, res, next) {
     try {
       const decodedToken = req.decodedToken;

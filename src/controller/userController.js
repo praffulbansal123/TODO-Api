@@ -1,6 +1,11 @@
 import logger from "../logger/logger.js";
 import {createUser, userLogin, userUpdate } from "../services/userServices.js"
 
+/*
+* @author Prafful Bansal
+* @description User registration 
+* @route POST user/register
+*/
 export const registerUserHandler = async (req, res, next) => {
     try {
 
@@ -14,6 +19,11 @@ export const registerUserHandler = async (req, res, next) => {
     }
 }
 
+/*
+* @author Prafful Bansal
+* @description User login 
+* @route POST user/login
+*/
 export const loginUserHandler = async (req, res, next) => {
     try {
 
@@ -31,6 +41,11 @@ export const loginUserHandler = async (req, res, next) => {
     }
 }
 
+/*
+* @author Prafful Bansal
+* @description Update user details 
+* @route PATCH user/updateUser
+*/
 export const updateUserHandler = async (req, res, next) => {
     try {
         const userId = req.decodedToken.userId
@@ -42,6 +57,11 @@ export const updateUserHandler = async (req, res, next) => {
     }
 }
 
+/*
+* @author Prafful Bansal
+* @description User logout 
+* @route GET  /user/logout
+*/
 export const logoutUserHandler =  async (req, res, next) => {
     req.session.destroy((err) => {
         if(err) {

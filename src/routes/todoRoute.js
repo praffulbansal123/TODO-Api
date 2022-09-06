@@ -8,7 +8,7 @@ const router = express.Router();
 // Creating TODO route
 router.post('/create', createTODOSchema, Middleware.authentication, TODOController.createTODOHandler)
 
-// List of TODO by userId
+// List of TODO by different filter querry
 router.get('/get', Middleware.authentication, TODOController.getTODOHandler )
 
 // Update TODO route

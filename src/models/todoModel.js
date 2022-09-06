@@ -3,6 +3,10 @@ import mongoose from "mongoose"
 const {Schema, model, Types} = mongoose
 const ObjectId = Types.ObjectId;
 
+/*
+* @author Prafful Bansal
+* @description TODO schema and model
+*/
 export const todoSchema = new Schema({
     title: {type: String},
     discription: {type: String},

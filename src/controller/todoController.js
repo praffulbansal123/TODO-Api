@@ -1,6 +1,11 @@
 import logger from "../logger/logger.js";
 import { createTODO, getTODO, updateTodo, deleteTODO } from "../services/todoService.js"
 
+/*
+* @author Prafful Bansal
+* @description Create a new TODO
+* @route POST todo/create
+*/
 export const createTODOHandler = async (req, res, next) => {
     try {
         const input = req.body;
@@ -16,6 +21,11 @@ export const createTODOHandler = async (req, res, next) => {
     }
 };
 
+/*
+* @author Prafful Bansal
+* @description Fetching TODO based on different filter query
+* @route GET todo/get
+*/
 export const getTODOHandler = async (req, res, next) => {
     try {
 
@@ -31,6 +41,11 @@ export const getTODOHandler = async (req, res, next) => {
     }
 };
 
+/*
+* @author Prafful Bansal
+* @description Update TODO status
+* @route PATCH todo/update/:todoId
+*/
 export const updateTODOHandler = async (req, res, next) => {
     try {
         const todoId = req.params.todoId
@@ -46,6 +61,11 @@ export const updateTODOHandler = async (req, res, next) => {
     }
 }
 
+/*
+* @author Prafful Bansal
+* @description Update TODO isDeleted to true
+* @route PATCH todo/delete/:todoId
+*/
 export const deleteTODOHandler = async (req, res, next) => {
     try {
         const input = req.params.todoId;

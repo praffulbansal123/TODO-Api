@@ -1,5 +1,9 @@
 import Joi from "joi";
 
+/*
+* @author Prafful Bansal
+* @description Joi validation for creating TODO
+*/
 export const registerTODOSchema = Joi.object({
     title: Joi.string().required().trim(),
     discription: Joi.string().required().trim().min(5),
@@ -10,6 +14,10 @@ export const registerTODOSchema = Joi.object({
     isDeleted: Joi.boolean().default(false)
 })
 
+/*
+* @author Prafful Bansal
+* @description Joi validation for updating TODO status
+*/
 export const updateTODOSchema = Joi.object({
     status: Joi.string().required().trim().valid('TODO', 'In Progress', 'Completed'),
 })

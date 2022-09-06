@@ -1,6 +1,10 @@
 import { registerUserSchema, loginUserSchema, updateUserSchema } from '../schemas/userJoiSchema.js'
 import { registerTODOSchema, updateTODOSchema } from '../schemas/todoJoiSchema.js'
 
+/*
+* @author Prafful Bansal
+* @description Joi validation for the incoming request
+*/
 const requestValidator = (req, next, schema) => {
     const options = {
         abortEarly: false, // include all errors

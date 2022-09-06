@@ -1,8 +1,13 @@
 import TODO from "../models/todoModel.js";
 import createError from "http-errors";
 
+/*
+* @author Prafful Bansal
+* @description Service for creating new TODO
+*/
 export const createTODO = async (input, payload) => {
     try {
+
         if(!payload.userId)
             throw createError.NotFound("Missing userId");
 
@@ -17,6 +22,10 @@ export const createTODO = async (input, payload) => {
     }
 };
 
+/*
+* @author Prafful Bansal
+* @description Service for getting TODO by different filter query
+*/
 export const getTODO = async (input, payload) => {
     try{
 
@@ -44,6 +53,10 @@ export const getTODO = async (input, payload) => {
     }
 };
 
+/*
+* @author Prafful Bansal
+* @description Service for updating  TODO status
+*/
 export const updateTodo = async (input, payload, todoId) => {
     try {
         
@@ -67,6 +80,10 @@ export const updateTodo = async (input, payload, todoId) => {
     }
 }
 
+/*
+* @author Prafful Bansal
+* @description Service for updating  TODO isDeleted to true
+*/
 export const deleteTODO = async (input, payload) => {
     try {
         const todoById = await TODO.find({_id: input, isDeleted: false})
