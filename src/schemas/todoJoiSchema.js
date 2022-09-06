@@ -9,3 +9,7 @@ export const registerTODOSchema = Joi.object({
     dueDate: Joi.date().required(),
     isDeleted: Joi.boolean().default(false)
 })
+
+export const updateTODOSchema = Joi.object({
+    status: Joi.string().required().trim().valid('TODO', 'In Progress', 'Completed'),
+})

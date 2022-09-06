@@ -1,5 +1,5 @@
 import { registerUserSchema, loginUserSchema, updateUserSchema } from '../schemas/userJoiSchema.js'
-import { registerTODOSchema } from '../schemas/todoJoiSchema.js'
+import { registerTODOSchema, updateTODOSchema } from '../schemas/todoJoiSchema.js'
 
 const requestValidator = (req, next, schema) => {
     const options = {
@@ -35,5 +35,10 @@ export const updateSchema = (req, res, next) => {
 
 export const createTODOSchema = (req, res, next) => {
     const schema = registerTODOSchema
+    requestValidator(req, next, schema);
+}
+
+export const updateTODO = (req, res, next) => {
+    const schema = updateTODOSchema
     requestValidator(req, next, schema);
 }
