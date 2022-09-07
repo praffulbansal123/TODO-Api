@@ -8,15 +8,16 @@ import createError from "http-errors";
 export const createTODO = async (input, payload) => {
     try {
 
-        if(!payload.userId)
-            throw createError.NotFound("Missing userId");
+        const todo = await TODO.findOne({title: input.title, createdBy: payload.userId, isDeleted: false})
+        if(todo)
+            throw createError.NotAcceptable(`TODO with title ${input.title} created by same user already exits`);
 
         // adding creator id
         input.createdBy = payload.userId;
       
-        // creating order
-        const orderDetails = await TODO.create(input);
-        return orderDetails;
+        // creating  TODO
+        const todoDetails = await TODO.create(input);
+        return todoDetails;
     }   catch (error) {
             throw error;
     }

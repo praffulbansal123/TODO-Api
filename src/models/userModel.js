@@ -23,8 +23,8 @@ userSchema.pre('save', async function (next) {
         const hashedPassword = await bcrypt.hash(this.password, salt);
         this.password = hashedPassword;
         return next();
-    } catch (err) {
-        return next(err);
+    } catch (error) {
+        return next(error);
     }
 });
 

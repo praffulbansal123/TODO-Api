@@ -56,7 +56,7 @@ app.use(async (req, res, next) => {
 // Intializing error-handling
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.send({ status: false, status1: err.status || 500, mssg: err.message });
+  res.send({ status: false, status1: err.status || 500, message: err.message });
 });
 
 export default app;

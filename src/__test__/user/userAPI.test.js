@@ -21,7 +21,7 @@ describe(endpointUrl, () => {
       .send(Input.user1);
     expect(response.statusCode).toBe(406);
     expect(response.body.status).toEqual(false);
-    expect(response.body.mssg).toEqual("Email already exists");
+    expect(response.body.message).toEqual("Email already exists");
   });
 
   it("will not create user as phone already exits" + endpointUrl, async () => {
@@ -30,7 +30,7 @@ describe(endpointUrl, () => {
       .send(Input.user2);
     expect(response.statusCode).toBe(406);
     expect(response.body.status).toEqual(false);
-    expect(response.body.mssg).toEqual("Phone number already exists");
+    expect(response.body.message).toEqual("Phone number already exists");
   });
 })
 
@@ -43,7 +43,7 @@ describe(endpointUrl, () => {
       .send({email: "user1@gmail.com", password: "Password@1"});
     expect(response.statusCode).toBe(200);
     expect(response.body.status).toEqual(true);
-    expect(response.body.msg).toEqual("Login successfull");
+    expect(response.body.message).toEqual("Login successfull");
     // expect(response.body.token).toEqual(token);
   });
 
@@ -53,7 +53,7 @@ describe(endpointUrl, () => {
       .send({email: "user1@gmail.com", password: "Password@2"});
     expect(response.statusCode).toBe(401);
     expect(response.body.status).toEqual(false);
-    expect(response.body.mssg).toEqual("Invalid Password");
+    expect(response.body.message).toEqual("Invalid Password");
   })
 
   it("Invalid EmailId" + endpointUrl1, async () => {
@@ -62,7 +62,7 @@ describe(endpointUrl, () => {
       .send({email: "usergmail.com", password: "Password@1"});
     expect(response.statusCode).toBe(422);
     expect(response.body.status).toEqual(false);
-    expect(response.body.mssg).toEqual("\"email\" must be a valid email");
+    expect(response.body.message).toEqual("\"email\" must be a valid email");
   })
 
   it("will give email does not exits" + endpointUrl1, async () => {

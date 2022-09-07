@@ -13,7 +13,7 @@ export const createTODOHandler = async (req, res, next) => {
     
         const todo = await createTODO(input, payload);
     
-        return res.status(201).send({status: true,message: "TODO created successfully",todoDetails: todo,});
+        return res.status(201).send({status: true, message: "TODO created successfully", todoDetails: todo,});
     
     } catch (error) {
         logger.info(error.message);

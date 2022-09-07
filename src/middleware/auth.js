@@ -11,7 +11,7 @@ export const authentication = async function (req, res, next) {
     let token = req.headers["authorization"];
 
     if (!token || token.split(" ")[0] !== "Bearer") {
-      throw new createError.Unauthorized("Token is required...please login first." );
+      throw new createError.Unauthorized("Token is required...please login first" );
     }
 
     token = token.split(" ")[1];

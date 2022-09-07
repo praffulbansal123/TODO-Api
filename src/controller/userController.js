@@ -33,7 +33,7 @@ export const loginUserHandler = async (req, res, next) => {
 
         res.header('Authorization', 'Bearer ' + login.token)
 
-        return res.status(200).send({status: true, msg: "Login successfull", token: login.token, user: login.user})
+        return res.status(200).send({status: true, message: "Login successfull", token: login.token, user: login.user})
        
     } catch (error) {
         logger.info(error.message);
