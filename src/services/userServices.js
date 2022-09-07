@@ -26,7 +26,7 @@ export const createUser = async (input) => {
     const user = await User.create(input);
 
     // masking password
-    user.password = undefined;
+    // user.password = undefined;
 
     return user;
   } catch (error) {

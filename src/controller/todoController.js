@@ -34,7 +34,7 @@ export const getTODOHandler = async (req, res, next) => {
 
         const todoList = await getTODO(input, payload);
 
-        return res.status(201).send({ status: true, message: "TODO list fetched", count: todoList.length, data: todoList})
+        return res.status(200).send({ status: true, message: "TODO list fetched", count: todoList.length, data: todoList})
     } catch (error) {
         logger.info(error.message);
         next(error);
@@ -54,7 +54,7 @@ export const updateTODOHandler = async (req, res, next) => {
     
         const updatedTodo = await updateTodo(input, payload, todoId);
     
-        return res.status(201).send({ status: true, message: "TODO has been successfully updated", data: updatedTodo})
+        return res.status(200).send({ status: true, message: "TODO has been successfully updated", data: updatedTodo})
     } catch (error) {
         logger.info(error.message);
         next(error);
@@ -73,7 +73,7 @@ export const deleteTODOHandler = async (req, res, next) => {
     
         const deletedTodo = await deleteTODO(input, payload);
     
-        return res.status(201).send({ status: true, message: "TODO has been successfully deleted", data: deletedTodo})
+        return res.status(200).send({ status: true, message: "TODO has been successfully deleted", data: deletedTodo})
     } catch (error) {
         logger.info(error.message);
         next(error);

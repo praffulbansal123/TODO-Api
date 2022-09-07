@@ -11,7 +11,7 @@ export const registerUserHandler = async (req, res, next) => {
 
         const user = await createUser(req.body)
 
-        return res.status(200).send({status: true, message: 'New user registered successfully', data: user})
+        return res.status(201).send({status: true, message: 'New user registered successfully', data: user})
     }
     catch(error){
         logger.info(error.message)
