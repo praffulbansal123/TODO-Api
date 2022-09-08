@@ -5,15 +5,16 @@ import * as Input from './mock-data/todoinput.js'
 
 const endpointUrl = "/todo/";
 let token;
+let firstTODO
 
 beforeAll((done) => {
-      request(app)
-        .post('/user/login')
-        .send(Input.user)
-        .end((err, response) => {
-          token = response.body.token; // save the token!
-          done();
-        });
+  request(app)
+    .post('/user/login')
+    .send(Input.user)
+    .end((err, response) => {
+      token = response.body.token; // save the token!
+      done();
+    });
 });
 
 
@@ -62,5 +63,43 @@ describe(endpointUrl, () => {
       expect(response.statusCode).toBe(200);
       expect(response.body.status).toEqual(true);
       expect(response.body.message).toEqual("TODO list fetched");
+      firstTODO = response.body.data[0]
   });
+
+  it("should not update TODO status list as status is not provided" + endpointUrl, async () => {
+    const response = await request(app)
+      .patch(endpointUrl+'update/:todoId')
+      expect(response.statusCode).toBe(422);
+      expect(response.body.status).toEqual(false);
+      expect(response.body.message).toEqual("\"status\" is required");
+  });
+
+  it("should not update TODO status list as status provided is not valid" + endpointUrl, async () => {
+    const response = await request(app)
+      .patch(endpointUrl+'update/:todoId')
+      .send({status: "dsaklfjk"})
+      expect(response.statusCode).toBe(422);
+      expect(response.body.status).toEqual(false);
+      expect(response.body.message).toEqual("\"status\" must be one of [Pending, In Progress, Completed]");
+  });
+
+  it("should not update TODO status list as token is not provided" + endpointUrl, async () => {
+    const response = await request(app)
+      .patch(endpointUrl+'update/:todoId')
+      .send({status: "Pending"})
+      expect(response.statusCode).toBe(401);
+      expect(response.body.status).toEqual(false);
+      expect(response.body.message).toEqual("Token is required...please login first");
+  });
+
+  it("should update TODO status successfully" + endpointUrl, async () => {
+    const response = await request(app)
+      .patch(endpointUrl+'update/'+firstTODO._id)
+      .set('Authorization', `Bearer ${token}`)
+      .send({status: "Completed"})
+      expect(response.body.message).toEqual("TODO has been successfully updated");
+      expect(response.statusCode).toBe(200);
+      expect(response.body.status).toEqual(true);
+  });
+
 })
