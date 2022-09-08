@@ -6,7 +6,7 @@ import * as Input from './mock-data/input.js'
 const endpointUrl = "/user/register";
 
 describe(endpointUrl, () => {
-  it("User will be successfully created" + endpointUrl, async () => {
+  it("should create User successfully" + endpointUrl, async () => {
     const response = await request(app)
       .post(endpointUrl)
       .send(Input.user3);
@@ -15,7 +15,7 @@ describe(endpointUrl, () => {
     expect(response.body.message).toEqual("New user registered successfully");
   });  
   
-  it("will not create user as email already exits" + endpointUrl, async () => {
+  it("should not create user as email already exits" + endpointUrl, async () => {
     const response = await request(app)
       .post(endpointUrl)
       .send(Input.user1);
@@ -24,7 +24,7 @@ describe(endpointUrl, () => {
     expect(response.body.message).toEqual("Email already exists");
   });
 
-  it("will not create user as phone already exits" + endpointUrl, async () => {
+  it("should not create user as phone already exits" + endpointUrl, async () => {
     const response = await request(app)
       .post(endpointUrl)
       .send(Input.user2);
@@ -37,17 +37,16 @@ describe(endpointUrl, () => {
 const endpointUrl1 = "/user/login"
 
 describe(endpointUrl, () => {
-  it("User will be successfully logged in" + endpointUrl1, async () => {
+  it("should allow user tobe successfully logged in" + endpointUrl1, async () => {
     const response = await request(app)
       .post(endpointUrl1)
       .send({email: "user1@gmail.com", password: "Password@1"});
     expect(response.statusCode).toBe(200);
     expect(response.body.status).toEqual(true);
     expect(response.body.message).toEqual("Login successfull");
-    // expect(response.body.token).toEqual(token);
   });
 
-  it("Invalid password" + endpointUrl1, async () => {
+  it("should return Invalid password" + endpointUrl1, async () => {
     const response = await request(app)
       .post(endpointUrl1)
       .send({email: "user1@gmail.com", password: "Password@2"});
@@ -56,7 +55,7 @@ describe(endpointUrl, () => {
     expect(response.body.message).toEqual("Invalid Password");
   })
 
-  it("Invalid EmailId" + endpointUrl1, async () => {
+  it("should return Invalid EmailId" + endpointUrl1, async () => {
     const response = await request(app)
       .post(endpointUrl1)
       .send({email: "usergmail.com", password: "Password@1"});
@@ -65,7 +64,7 @@ describe(endpointUrl, () => {
     expect(response.body.message).toEqual("\"email\" must be a valid email");
   })
 
-  it("will give email does not exits" + endpointUrl1, async () => {
+  it("should give error that eamil does not exits" + endpointUrl1, async () => {
     const response = await request(app)
       .post(endpointUrl1)
       .send({email: "user10@gmail.com", password: "Password@1"});

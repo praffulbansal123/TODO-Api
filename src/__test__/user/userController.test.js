@@ -11,7 +11,7 @@ let req, res, next;
 beforeEach(() => {
   req = httpMocks.createRequest();
   res = httpMocks.createResponse();
-  next = null;
+  next = jest.fn();
 });
 
 describe("UserController.registerUserHandler", () => {
@@ -39,8 +39,17 @@ describe("UserController.registerUserHandler", () => {
     expect(User.create).toBeCalledWith(Input.user3);
   });
 
-  it("should return 201 response code", () => {
-    UserController.registerUserHandler(req, res, next);
-    expect(res.statusCode).toBe(200);
+  it("should return 201 response code", async () => {
+    await UserController.registerUserHandler(req, res, next);
+    expect(res.statusCode).toBe(201);
+    expect(res._isEndCalled()).toBeTruthy()
+  });
+
+  it("should handle errors", async () => {
+    const errorMessage = { message: "User can not be created" };
+    const rejectedPromise = Promise.reject(errorMessage);
+    User.create.mockReturnValue(rejectedPromise);
+    await UserController.registerUserHandler(req, res, next);
+    expect(next).toBeCalledWith(errorMessage);
   });
 })

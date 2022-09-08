@@ -15,3 +15,7 @@ export const user = {
     email: "user1@gmail.com",
     password: "Password@1"
 }
+
+export const condition = {
+    priority: "Medium"
+}
