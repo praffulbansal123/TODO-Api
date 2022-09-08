@@ -89,6 +89,12 @@ export const userUpdate = async (input, userId) => {
 
     if(user.phone && user.phone === input.phone)
       throw createError.NotAcceptable(`user phone no is already upto date`)
+
+    const isPhoneNumberExist = await User.findOne({ phone: input.phone });
+
+    if (isPhoneNumberExist) {
+      throw createError.NotAcceptable("Phone number already exists");
+    }
     
     if(user.fname && user.fname === input.fname)
       throw createError.NotAcceptable(`user fname no is already upto date`)
